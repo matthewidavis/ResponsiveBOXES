@@ -54,7 +54,3 @@ adjustCanvasSize();
 // Optionally, re-calculate anything else that depends on the canvas size  
 });  
 \`\`\`
-
-# Conclusion
-
-This document provides a comprehensive guide for implementing responsive canvas drawing in web applications. By following the outlined strategy, developers can ensure that their canvas-based applications are responsive and visually consistent across different screen sizes and devices. The key to success lies in understanding and applying the principles of dynamic canvas sizing, proportional scaling of drawn elements, and responding effectively to browser resizing events.
