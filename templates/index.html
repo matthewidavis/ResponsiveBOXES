@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>IP Camera Stream with Interactive Grid</title>
+    <style>
+        .camera-feed-container { display: inline-block; position: relative; }
+        .camera-feed { width: 320px; height: 180px; } /* Adjust as needed for aspect ratio */
+        .delete-feed-button { position: absolute; top: 0; right: 0; }
+        .grid-row { display: flex; align-items: center; margin-bottom: 10px; }
+        .title-input, .http-command { margin-right: 10px; }
+        #canvas-container { position: relative; margin: 0px auto; border: 10px #333 solid; }
+        #canvas { position: absolute; top: 0; left: 0; }
+    </style>
+</head>
+<body>
+    <!-- Section to Add Camera Feeds -->
+    <div>
+        <input type="text" id="cameraIP" placeholder="Enter Camera IP"/>
+        <button onclick="addCameraFeed()">Add Camera Feed</button>
+    </div>
+    <!-- Button to Clear Saved State -->
+    <div>
+        <button id="clearStateButton">Clear Saved State</button>
+    </div>
+    <!-- Canvas Container -->
+    <div id="canvas-container">
+        <!-- Camera Feed Containers -->
+        <div id="cameraFeeds"></div>
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <!-- Grid Rows -->
+    <div id="grid">
+        {% for i in range(10) %}
+        <div class="grid-row">
+            <button class="draw-box-button">Draw Box</button>
+            <input type="text" placeholder="Title" class="title-input"/>
+            <input type="color" class="color-picker"/>
+            <input type="text" placeholder="HTTP Command" class="http-command"/>
+            <button class="test-button">Test</button>
+            <button class="clear-button">Clear</button>
+            <label>
+                <input type="checkbox" class="activation-checkbox"/> Active
+            </label>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Additional Canvases for Displaying Processed Images -->
+    <canvas id="grayCanvas" width="320" height="180" style="border:1px solid black;"></canvas>
+    <canvas id="diffCanvas" width="320" height="180" style="border:1px solid black;"></canvas>
+    <canvas id="thresholdCanvas" width="320" height="180" style="border:1px solid black;"></canvas>
+    <canvas id="contourCanvas" width="320" height="180" style="border:1px solid black;"></canvas>
+
+    <!-- Load OpenCV.js -->
+    <script src="https://docs.opencv.org/master/opencv.js"></script>
+    <!-- Your existing JavaScript file -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
